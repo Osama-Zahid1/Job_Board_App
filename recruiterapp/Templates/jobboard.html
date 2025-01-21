@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content="width=device-width, initial-scale=1.0">
+    <title>Jobboard</title>
+</head>
+<body>
+    <ul>
+        {% for x in listing %}
+        <li>
+            <h2>Job Title: {{ x.jobtitle }}</h2> 
+            <p>Job Desp: {{ x.jobdesp }}</p> 
+            <p>Skill Req: {{ x.skillsreq }}</p> 
+            <p>Business: {{ x.businessadd }}</p> 
+            <p>salary: {{ x.salary }}</p> 
+            <a href="{% url 'apply_for_job' x.id %}">
+                <button>Apply Now</button>
+            </a>
+        </li>
+        {% endfor %}
+       
+    </ul>
+</body>
+</html>

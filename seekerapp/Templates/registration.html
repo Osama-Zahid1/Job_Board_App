@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head><form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ regform.as_p }}  {# Display registration type form #}
+    {% if regform.is_bound %}
+        {% if regform.ustype.value == 'seek' %} {#we have written this logic in template because it complements the logic in view code as the server side is no visible to client side so we have to wirte code that compliment both side logic When the template is rendered on the client side, it doesn't have access to the server-side variables directly. Therefore, you need to provide the template with the necessary information to make decisions about how to render the page. In this case, you need to pass the information about the selected user type (utype) from the view to the template.#}
+            {{ seform.as_p }}  {# Display seeker registration form #}
+        {% elif regform.ustype.value == 'recruit' %}
+            {{ reform.as_p }}  {# Display recruiter registration form #}
+        {% endif %}
+    {% endif %}
+    <button type="submit">Register</button>
+</form>

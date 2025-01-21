@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to Your Dashboard, {{ user_data.username }}</h1>
+    <form method="GET" action="{% url 'supurl' user_data.pk %}" enctype="multipart/form-data">
+        <input type="submit" value="Update">
+    </form>  
+    <form action="{% url 'jobb' %}" method="get">
+        <button type="submit" class="btn btn-primary">View Job Board</button>
+    </form>
+    <p>Email: {{ user_data.email }}</p>
+    <p>Degree: {{ user_data.degree }}</p>
+    <p>Experience: {{ user_data.experience }}</p>
+    <p>Address: {{ user_data.address }}</p>
+    <p>Skills: {{ user_data.skills }}</p>
+    {% if user_data.pic %}
+    <img src="{{ user_data.pic.url }}" alt="Profile Picture">
+    {% endif %}
+    {% if user_data.resume %}
+    <a href="{{ user_data.resume.url }}">Download Resume</a>
+    {% endif %}
+</body>
+</html>

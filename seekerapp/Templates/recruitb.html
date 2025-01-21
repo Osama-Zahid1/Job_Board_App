@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Profile</title>
+</head>
+<body>
+    <h1>Recruiter Profile</h1>
+    <form method="GET" action="{% url 'rupurl' user_data.pk %}">
+        <input type="submit" value="Update">
+    </form>
+
+    <form method='POST' action="{% url 'jobf' user_data.pk %}">
+        {% csrf_token %}
+        {{ jform.as_p }}
+        <input type="submit" value="jobform">
+
+    </form>
+    <form action="{% url 'jobb' %}" method="get">
+        <button type="submit" class="btn btn-primary">View Job Board</button>
+    </form>    
+    <form method="GET" action="{% url 'rupurl' user_data.pk %}">
+        <input type="submit" value="Update">
+    </form>
+
+    <p><strong>Username:</strong> {{ user_data.username }}</p>
+    <p><strong>Email:</strong> {{ user_data.email }}</p>
+    <p><strong>Business Name:</strong> {{ user_data.businessname }}</p>
+    <p><strong>Business Type:</strong> {{ user_data.businesstype }}</p>
+
+    <h2>Applications Received</h2>
+<ul>
+    {% for application in applications %}
+    <li>
+        <strong>{{ application.seeker.username }}</strong> applied for <strong>{{ application.job.jobtitle }}</strong>
+        <a href="{{ application.resume.url }}">Download Resume</a>
+        <a href="{% url 'dashboard' application.seeker.pk %}">View Profile</a>
+    </li>
+    {% empty %}
+    <li>No applications received yet.</li>
+    {% endfor %}
+</ul>
+
+
+    
+    
+    </ul>
+</body>
+</html>
